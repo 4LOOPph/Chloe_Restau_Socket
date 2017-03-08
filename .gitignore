@@ -1,0 +1,11 @@
+/node_modules/
+/npm-debug.log
+/public/bower_components
+/bower_components/
+/bower_components
+/.tmp
+/.sass-cache
+/dist
+/appfront/bower_components
+/daemon
+desktop.ini
