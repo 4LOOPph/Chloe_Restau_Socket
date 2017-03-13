@@ -3,25 +3,33 @@ var clients = [];
 
 module.exports = function(app, io, config) {
     var currentUser;
+    var socketId;
+
     app.route('/').get(function(req, res) {
         res.send('Hello World');
     });
 
     io.on('connection', function(socket) {
+        console.log('socket: ',socket.id);
+        socketId = socket.id;
+        
+        socket.on('connect', function(socket) {
+            console.log('connected to server: ',socket);
+        });
 
-        socket.on('register:device', function(data){
+        socket.on('register:device', function(data) {
             socket.join(data);
         });
 
-        socket.on('ReceiveData:sendingTo:ChloePOS', function(data){ // SENDING DATA FROM ORDERING TO CHLOE POS
+        socket.on('ReceiveData:sendingTo:ChloePOS', function(data) { // SENDING DATA FROM ORDERING TO CHLOE POS
             io.sockets.in(data.roomname).emit('sendto:ChloePOS', data);
         });
 
-        socket.on('ReceiveData:sendingTo:Kitchen', function(data){  // SENDING DATA FROM CHLOEPOS TO KITCHEN
+        socket.on('ReceiveData:sendingTo:Kitchen', function(data) { // SENDING DATA FROM CHLOEPOS TO KITCHEN
             io.sockets.in(data.roomname).emit('sendto:Kitchen', data);
         });
 
-        socket.on('ReceiveData:sendingTo:Que', function(data){  // SENDING DATA FROM KITCHEN TO QUE
+        socket.on('ReceiveData:sendingTo:Que', function(data) { // SENDING DATA FROM KITCHEN TO QUE
             io.socket.in(data.roomname).emit('sendto:Que', data);
         });
 
