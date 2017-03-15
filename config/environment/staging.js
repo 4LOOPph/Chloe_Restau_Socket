@@ -5,7 +5,7 @@ module.exports = {
     dbUrl: process.env.DB_URL || 'mongodb://127.0.0.1:27017/GearVR',
     db_user: process.env.DB_USER || 'GearVR',
     db_password: process.env.DB_USER || '12345',
-    port: process.env.APP_PORT || 3000,
+    port: process.env.APP_PORT || 5006,
     ip: process.env.IP,
     app_name: process.env.APP_NAME || "GearVR",
     api_host_url: process.env.API_HOST_URL || 'http://52.163.209.127:3000',
