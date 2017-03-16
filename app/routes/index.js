@@ -26,6 +26,8 @@ module.exports = function(app, io, config) {
         });
 
         socket.on('ReceiveData:sendingTo:Kitchen', function(data) { // SENDING DATA FROM CHLOEPOS TO KITCHEN
+            data = JSON.parse(data);
+            data.orders = JSON.parse(data.orders);
             io.sockets.in(data.roomname).emit('sendto:Kitchen', data);
         });
 
