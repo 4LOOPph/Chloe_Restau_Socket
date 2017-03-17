@@ -32,7 +32,8 @@ module.exports = function(app, io, config) {
         });
 
         socket.on('ReceiveData:sendingTo:Que', function(data) { // SENDING DATA FROM KITCHEN TO QUE
-            io.socket.in(data.roomname).emit('sendto:Que', data);
+            console.log('data: ',data);
+            io.sockets.in(data.roomname).emit('sendto:Que', data);
         });
 
         socket.on('disconnect', function() {
