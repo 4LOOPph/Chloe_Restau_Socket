@@ -21,7 +21,9 @@ module.exports = function(app, io, config) {
             socket.join(data);
         });
 
-        socket.on('ReceiveData:sendingTo:Order', function(data){
+        socket.on('ReceiveData:sendingTo:Order', function(data){ // SENDING DATA FROM CHLOE TO ORDER APP
+            data.customer = JSON.parse(data.customer);
+            data.orders = JSON.parse(data.orders);
             io.sockets.in(data.roomname).emit("sendTo:OrderApp", data);
         });
 
