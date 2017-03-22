@@ -21,6 +21,10 @@ module.exports = function(app, io, config) {
             socket.join(data);
         });
 
+        socket.on('ReceiveData:sendingTo:Order', function(data){
+            io.sockets.in(data.roomname).emit("sendTo:OrderApp", data);
+        });
+
         socket.on('ReceiveData:sendingTo:ChloePOS', function(data) { // SENDING DATA FROM ORDERING TO CHLOE POS
             io.sockets.in(data.roomname).emit('sendto:ChloePOS', data);
         });
