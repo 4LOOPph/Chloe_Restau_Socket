@@ -27,6 +27,10 @@ module.exports = function(app, io, config) {
             io.sockets.in(data.roomname).emit("sendTo:OrderApp", data);
         });
 
+        socket.on('ReceiveData:VoidORSuccessOrderTo:OrderApp', function(data){ // SENDING DATA FROM CHLOE TO ORDER APP TO VOID ORDER
+            io.sockets.in(data.roomname).emit("VoidOrSuccessTo:OrderApp", data);
+        });
+
         socket.on('ReceiveData:sendingTo:ChloePOS', function(data) { // SENDING DATA FROM ORDERING TO CHLOE POS
             io.sockets.in(data.roomname).emit('sendto:ChloePOS', data);
         });
